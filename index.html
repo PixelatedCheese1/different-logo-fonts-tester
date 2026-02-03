@@ -1,74 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Logo Fonts Tester</title>
+<html>
+  <head>
+    <title>Logo Fonts Tester</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Oswald:wght@700&family=Lobster&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <h1 id="logoText" style="text-align:center;margin:10px 0;">Logo Fonts Tester</h1>
 
-<!-- Example Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Oswald:wght@700&family=Lobster&display=swap" rel="stylesheet">
-
-<style>
-  body {
-    background: #121212;
-    color: white;
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-  }
-
-  h1 {
-    font-size: 3rem;
-    transition: font-family 0.6s ease-in-out, color 0.6s ease-in-out;
-  }
-
-  .font-name {
-    margin-top: 10px;
-    font-size: 1rem;
-    color: #888;
-  }
-</style>
-</head>
-<body>
-
-<h1 id="logoText">Logo Fonts Tester</h1>
-<div class="font-name" id="fontName"></div>
-
-<script>
-  // Array of custom font-family names
-  const fonts = [
-    "Poppins",
-    "Playfair Display",
-    "Montserrat",
-    "Oswald",
-    "Lobster"
-  ];
-
-  const colors = [
-    "#FF4081",
-    "#80D8FF",
-    "#FFD740",
-    "#69F0AE",
-    "#FF5252"
-  ];
-
-  const text = document.getElementById("logoText");
-  const fontName = document.getElementById("fontName");
-
-  let i = 0;
-  function cycleFont() {
-    text.style.fontFamily = fonts[i];
-    text.style.color = colors[i];
-    fontName.textContent = `Font: ${fonts[i]}`;
-    i = (i + 1) % fonts.length;
-  }
-
-  cycleFont();
-  setInterval(cycleFont, 2000); // change every 2 seconds
-</script>
-
-</body>
+    <script>
+const fonts = ["Poppins", "Playfair Display", "Montserrat", "Oswald", "Lobster"];
+let i = 0, el = document.getElementById("logoText");
+function cycleFont() {
+  el.style.fontFamily = fonts[i];
+  i = (i + 1) % fonts.length;
+}
+cycleFont();
+setInterval(cycleFont, 2000);
+    </script>
+  </body>
 </html>
