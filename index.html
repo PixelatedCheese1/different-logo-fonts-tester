@@ -16,14 +16,22 @@
       .CNN {
     font-family: 'CNNnews', sans-serif;
 }
+@font-face {
+  font-family: 'ninWii';
+  src: url('fonts/contb.ttf') format('truetype');
+}
+      .WiiNintendo {
+    font-family: 'ninWii', sans-serif;
+}
 </style>
   </head>
   <body>
-    <h1 id="logoText" style="text-align:center;margin:10px 0;">Logo Fonts Tester</h1>
-    <p class="CNN">CNN</p>
+    <h1 id="logoText" style="text-align:center;margin:10px 0;">Logo Fonts Tester</h1> <br>
+    <p class="CNN">CNN</p> <br>
+    <p class="WiiNintendo">Wii</p> <br>
 
     <script>
-const fonts = ["CNNnews", "Playfair Display", "Montserrat", "Oswald", "Lobster"];
+const fonts = ["CNNnews", "ninWii", "Montserrat", "Oswald", "Lobster"];
 let i = 0, el = document.getElementById("logoText");
 function cycleFont() {
   el.style.fontFamily = fonts[i];
