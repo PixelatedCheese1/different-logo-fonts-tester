@@ -1,44 +1,87 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Logo Fonts Tester</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Oswald:wght@700&family=Lobster&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Tester</title>
     <style>
-    p {
-    font-size: 50px; 
-    text-align:center;
-}
-@font-face {
-  font-family: 'CNNnews';
-  src: url('fonts/CNN.TTF') format('truetype');
-}
-      .CNN {
-    font-family: 'CNNnews', sans-serif;
-}
-@font-face {
-  font-family: 'ninWii';
-  src: url('fonts/contb.ttf') format('truetype');
-}
-      .WiiNintendo {
-    font-family: 'ninWii', sans-serif;
-}
-</style>
-  </head>
-  <body>
-    <h1 id="logoText" style="text-align:center;margin:10px 0;">Logo Fonts Tester</h1> <br>
-    <p class="CNN">CNN</p> <br>
-    <p class="WiiNintendo">Wii</p> <br>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        input, textarea, select, button {
+            margin: 10px 0;
+            display: block;
+        }
+        #preview {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            min-height: 100px;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Font Tester</h1>
+
+    <label for="fontUpload">Upload a font file (.ttf, .otf, .woff):</label>
+    <input type="file" id="fontUpload" accept=".ttf,.otf,.woff">
+
+    <label for="fontSize">Font Size:</label>
+    <select id="fontSize">
+        <option value="16px">16px</option>
+        <option value="24px">24px</option>
+        <option value="32px">32px</option>
+        <option value="48px">48px</option>
+        <option value="64px">64px</option>
+    </select>
+
+    <label for="textInput">Type your text:</label>
+    <textarea id="textInput" rows="4" cols="50" placeholder="Type something..."></textarea>
+
+    <div id="preview">Your text will appear here.</div>
 
     <script>
-const fonts = ["CNNnews", "ninWii", "Montserrat", "Oswald", "Lobster"];
-let i = 0, el = document.getElementById("logoText");
-function cycleFont() {
-  el.style.fontFamily = fonts[i];
-  i = (i + 1) % fonts.length;
-}
-cycleFont();
-setInterval(cycleFont, 2000);
+        const fontUpload = document.getElementById('fontUpload');
+        const fontSize = document.getElementById('fontSize');
+        const textInput = document.getElementById('textInput');
+        const preview = document.getElementById('preview');
+
+        let fontName = '';
+
+        fontUpload.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                fontName = file.name.split('.').slice(0, -1).join('.');
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const fontData = evt.target.result;
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        @font-face {
+                            font-family: '${fontName}';
+                            src: url('${fontData}');
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    preview.style.fontFamily = `'${fontName}', sans-serif`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        fontSize.addEventListener('change', () => {
+            preview.style.fontSize = fontSize.value;
+        });
+
+        textInput.addEventListener('input', () => {
+            preview.textContent = textInput.value || 'Your text will appear here.';
+        });
+
+        // Initialize
+        preview.style.fontSize = fontSize.value;
     </script>
-  </body>
+</body>
 </html>
